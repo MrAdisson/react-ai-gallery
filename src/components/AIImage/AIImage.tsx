@@ -17,11 +17,9 @@ const AIImage = ({ fileKey, alt, title, id }: any) => {
       style={{ position: "relative" }}
       onClick={onClick}
       onMouseEnter={() => {
-        console.log("HOVER");
         setHover(true);
       }}
       onMouseLeave={() => {
-        console.log("LEAVE");
         setHover(false);
       }}
     >

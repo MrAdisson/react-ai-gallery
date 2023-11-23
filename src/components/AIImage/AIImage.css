@@ -10,7 +10,7 @@
         rgba(0, 0, 0, 0.9)
     );
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-end;
     animation: fade-in 0.5s ease-in-out;
 }
@@ -19,13 +19,37 @@
     animation: fade-in 0.5s ease-in-out;
 }
 
-.AIImage-image-menu-bottom {
-    font-size: .8rem;
-    margin: 0 0 10px 10px;
+.AIImage-image-menu-element {
+    margin: 10px;
     color: bisque;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.AIImage-image-menu-title {
+    font-size: .8rem;
+    text-overflow: ellipsis;
+}
+.AIImage-image-menu-likeButton {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+}
+.AIImage-image-menu-likeButton:hover {
+    /* color: thgrough nice rose red */
+    color: #ff0000;
+    transform: scale(1.2);
+    transition: all 0.2s ease-in-out;
+}
+
+.AIImage-image-menu-likeButton > .liked {
+    color: #ff0000;
+}
+
+.LikeButtonAnimationEffect {
+    animation: like-button-to-the-sky-animation 0.5s ease-in-out;
 }
 
 @keyframes fade-out{
@@ -45,3 +69,16 @@
       opacity: 1.0
     }
   }
+
+
+@keyframes like-button-to-the-sky-animation {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
