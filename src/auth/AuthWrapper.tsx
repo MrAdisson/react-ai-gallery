@@ -1,9 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { RenderHeader } from "../components/structure/Header";
-import {
-  RenderMenu,
-  RenderRoutes,
-} from "../components/structure/RenderNavigation";
+import { RenderRoutes } from "../components/structure/RenderNavigation";
 import { jwtDecode } from "jwt-decode";
 import feathersClient from "@/configs/feathers";
 
@@ -77,7 +74,8 @@ export const AuthWrapper = () => {
     <AuthContext.Provider value={{ user, login, logout }}>
       <>
         <RenderHeader />
-        <RenderMenu />
+        {/* MENU IS IN HEADER, uncomment to get independant menu */}
+        {/* <RenderMenu /> */}
         <RenderRoutes />
       </>
     </AuthContext.Provider>

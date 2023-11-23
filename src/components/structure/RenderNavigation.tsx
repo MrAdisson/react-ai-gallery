@@ -1,6 +1,8 @@
 import { Link, Route, Routes } from "react-router-dom";
 import { AuthData } from "../../auth/AuthWrapper";
-import { RouteType, nav } from "./navigation";
+import { RouteType, nav, navigationIconStyle } from "./navigation";
+import { IoLogInOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 
 export const RenderRoutes = () => {
   const { user } = AuthData();
@@ -23,7 +25,9 @@ export const RenderMenu = () => {
   const MenuItem = ({ r }: { r: RouteType }) => {
     return (
       <div className="menuItem">
-        <Link to={r.path}>{r.name}</Link>
+        <div>
+          <Link to={r.path}>{r.icon}</Link>
+        </div>
       </div>
     );
   };
@@ -40,12 +44,14 @@ export const RenderMenu = () => {
       {user.isAuthenticated ? (
         <div className="menuItem">
           <Link to={"#"} onClick={logout}>
-            Log out
+            <IoLogOutOutline style={navigationIconStyle} />
           </Link>
         </div>
       ) : (
         <div className="menuItem">
-          <Link to={"login"}>Log in</Link>
+          <Link to={"login"}>
+            <IoLogInOutline style={navigationIconStyle} />
+          </Link>
         </div>
       )}
     </div>

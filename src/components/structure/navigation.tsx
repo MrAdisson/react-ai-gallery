@@ -3,12 +3,26 @@ import About from "@/components/pages/About";
 import Login from "@/components/pages/Login";
 import Profile from "@/components/pages/Profile";
 
+import { ReactElement } from "react";
+
+// ICONS
+
+import { IoHomeOutline } from "react-icons/io5";
+import { IoInformationCircleOutline } from "react-icons/io5";
+import { IoPersonCircleOutline } from "react-icons/io5";
+
 export type RouteType = {
   path: string;
   name: string;
   element: JSX.Element;
   isMenu: boolean;
   isPrivate: boolean;
+  icon?: ReactElement;
+};
+
+export const navigationIconStyle = {
+  fontSize: "2rem",
+  color: "white",
 };
 
 export const nav = [
@@ -18,6 +32,7 @@ export const nav = [
     element: <Home />,
     isMenu: true,
     isPrivate: false,
+    icon: <IoHomeOutline style={navigationIconStyle} />,
   },
   {
     path: "/about",
@@ -25,13 +40,7 @@ export const nav = [
     element: <About />,
     isMenu: true,
     isPrivate: false,
-  },
-  {
-    path: "/login",
-    name: "Login",
-    element: <Login />,
-    isMenu: false,
-    isPrivate: false,
+    icon: <IoInformationCircleOutline style={navigationIconStyle} />,
   },
   {
     path: "/profile",
@@ -39,5 +48,13 @@ export const nav = [
     element: <Profile />,
     isMenu: true,
     isPrivate: true,
+    icon: <IoPersonCircleOutline style={navigationIconStyle} />,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    element: <Login />,
+    isMenu: false,
+    isPrivate: false,
   },
 ] as RouteType[];
