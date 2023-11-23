@@ -25,10 +25,12 @@ const AuthContext = createContext<ContextType>({
 export const AuthData = () => useContext(AuthContext);
 
 export const AuthWrapper = () => {
+  // USER STATE PASSED TO APP CONTEXT
   const [user, setUser] = useState<User>({ email: "", isAuthenticated: false });
 
+  //RECONNECTER L'UTILISATEUR SI IL A UN TOKEN VALIDE
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("feathers-react-jwt");
     if (accessToken) {
       (async () => {
         try {
@@ -36,11 +38,10 @@ export const AuthWrapper = () => {
           if ((decodedToken.exp || 0) * 1000 < Date.now()) {
             setUser({ email: "", isAuthenticated: false });
           } else {
-            const data = await feathersClient.service("authentication").create({
+            const data = await feathersClient.authenticate({
               strategy: "jwt",
               accessToken,
             });
-            console.log(data);
             setUser({ email: data.user.email, isAuthenticated: true });
           }
         } catch (error) {
@@ -50,23 +51,18 @@ export const AuthWrapper = () => {
     }
   }, []);
 
+  // LOGIN & LOGOUT FUNCTIONS
   const login = async (email: string, password: string) => {
-    console.log("email", email);
-    console.log("password", password);
-
-    const data = await feathersClient.service("authentication").create({
+    const data = await feathersClient.authenticate({
       strategy: "local",
       email,
       password,
     });
-    console.log("data", data);
-    localStorage.setItem("accessToken", data.accessToken);
-    setUser({ email, isAuthenticated: true });
+    setUser({ ...data.user.email, isAuthenticated: true });
   };
-
   const logout = () => {
     if (!user) return;
-    localStorage.removeItem("accessToken");
+    feathersClient.logout();
     setUser({ ...user, isAuthenticated: false });
   };
 
@@ -74,8 +70,6 @@ export const AuthWrapper = () => {
     <AuthContext.Provider value={{ user, login, logout }}>
       <>
         <RenderHeader />
-        {/* MENU IS IN HEADER, uncomment to get independant menu */}
-        {/* <RenderMenu /> */}
         <RenderRoutes />
       </>
     </AuthContext.Provider>

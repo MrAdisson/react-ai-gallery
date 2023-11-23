@@ -10,6 +10,7 @@ import { ReactElement } from "react";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import ImageDetail from "../pages/ImageDetail";
 
 export type RouteType = {
   path: string;
@@ -22,7 +23,6 @@ export type RouteType = {
 
 export const navigationIconStyle = {
   fontSize: "2rem",
-  color: "white",
 };
 
 export const nav = [
@@ -32,7 +32,7 @@ export const nav = [
     element: <Home />,
     isMenu: true,
     isPrivate: false,
-    icon: <IoHomeOutline style={navigationIconStyle} />,
+    icon: <IoHomeOutline style={navigationIconStyle} className="navIcon" />,
   },
   {
     path: "/about",
@@ -40,7 +40,12 @@ export const nav = [
     element: <About />,
     isMenu: true,
     isPrivate: false,
-    icon: <IoInformationCircleOutline style={navigationIconStyle} />,
+    icon: (
+      <IoInformationCircleOutline
+        style={navigationIconStyle}
+        className="navIcon"
+      />
+    ),
   },
   {
     path: "/profile",
@@ -48,12 +53,21 @@ export const nav = [
     element: <Profile />,
     isMenu: true,
     isPrivate: true,
-    icon: <IoPersonCircleOutline style={navigationIconStyle} />,
+    icon: (
+      <IoPersonCircleOutline style={navigationIconStyle} className="navIcon" />
+    ),
   },
   {
     path: "/login",
     name: "Login",
     element: <Login />,
+    isMenu: false,
+    isPrivate: false,
+  },
+  {
+    path: "/image/:id",
+    name: "Image",
+    element: <ImageDetail />,
     isMenu: false,
     isPrivate: false,
   },

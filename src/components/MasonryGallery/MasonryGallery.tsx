@@ -97,9 +97,10 @@ const MasonryGallery = () => {
               imagesData.data.map((image: ImageType) => (
                 <AIImage
                   fileKey={image.fileKey}
+                  title={image.title}
                   alt={image.filename}
+                  id={image._id}
                   key={image._id}
-                  loading="lazy"
                 />
               ))}
           </Masonry>

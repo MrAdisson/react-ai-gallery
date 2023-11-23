@@ -12,12 +12,8 @@
   }
   
   /* Style your items */
-  .my-masonry-grid_column > img { /* change div to reference your elements you put in <Masonry> */
+  .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
     margin-bottom: 30px;
-  }
-  .my-masonry-grid_column > div > img{ /* change div to reference your elements you put in <Masonry> */
-    margin-bottom: 30px;
-    object-fit: contain;
   }
   
   @media (max-width: 730px) {

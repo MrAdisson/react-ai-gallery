@@ -1,0 +1,23 @@
+.image-and-desc-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: center; */
+  margin: 0 auto;
+  width: clamp(500px, 100%, 1100px);
+  padding: 0 20px;
+}
+
+/* first level children */
+.imageDetail-image-container {
+    width: 50%;
+    border: 1px solid #ccc;
+}
+.imageDetail-desc-container {
+    width: 50%;
+    border: 1px solid #ccc;
+}
+.imageDetail-image {
+    max-width: 50%;
+
+}

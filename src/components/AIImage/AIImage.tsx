@@ -1,29 +1,40 @@
+import { AWS_BUCKET_URL } from "@/utils/statics";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./AIImage.css";
+import AIImageMenu from "./AIImageMenu/AIImageMenu";
 
-const AIImage = ({ fileKey, alt }: any) => {
-  const AWS_BUCKET_URL =
-    "https://mradisson-ai-gallery.s3.eu-north-1.amazonaws.com/";
-
+const AIImage = ({ fileKey, alt, title, id }: any) => {
   const [hover, setHover] = useState(false);
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/image/${id}`);
+  };
 
   return (
-    <div>
-      <div className="image-menu"></div>
-      <img
-        src={`${AWS_BUCKET_URL}${fileKey}`}
-        alt={alt}
-        width="100%"
-        loading="lazy"
-        onMouseEnter={() => {
-          console.log("HOVER");
-          setHover(true);
-        }}
-        onMouseLeave={() => {
-          console.log("LEAVE");
-          setHover(false);
-        }}
-        style={{ ...styles.base, ...(hover && styles.hover) }}
-      />
+    <div
+      style={{ position: "relative" }}
+      onClick={onClick}
+      onMouseEnter={() => {
+        console.log("HOVER");
+        setHover(true);
+      }}
+      onMouseLeave={() => {
+        console.log("LEAVE");
+        setHover(false);
+      }}
+    >
+      <div style={{ ...styles.base, ...(hover && styles.hover) }}>
+        <AIImageMenu hover={hover} title={title} />
+
+        <img
+          src={`${AWS_BUCKET_URL}${fileKey}`}
+          alt={alt}
+          width="100%"
+          loading="lazy"
+        />
+      </div>
     </div>
   );
 };
@@ -31,13 +42,17 @@ const AIImage = ({ fileKey, alt }: any) => {
 const styles = {
   base: {
     cursor: "pointer",
-    transition: "all 0.3s ease",
-    // width: "300px",
+    transition: "all 0.3s ease-in-out",
   },
   hover: {
-    zIndex: 2,
     transform: "scale(1.05)",
-    boxShadow: "0 0 10px 0px rgba(0,0,0,0.75)",
+  },
+  fadeOut: {
+    transition: "all 0.3s ease-in-out",
+    opacity: 0,
+  },
+  menuHover: {
+    opacity: 1,
   },
 };
 

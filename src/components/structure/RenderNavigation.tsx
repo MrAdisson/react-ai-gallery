@@ -44,13 +44,13 @@ export const RenderMenu = () => {
       {user.isAuthenticated ? (
         <div className="menuItem">
           <Link to={"#"} onClick={logout}>
-            <IoLogOutOutline style={navigationIconStyle} />
+            <IoLogOutOutline style={navigationIconStyle} className="navIcon" />
           </Link>
         </div>
       ) : (
         <div className="menuItem">
           <Link to={"login"}>
-            <IoLogInOutline style={navigationIconStyle} />
+            <IoLogInOutline style={navigationIconStyle} className="navIcon" />
           </Link>
         </div>
       )}

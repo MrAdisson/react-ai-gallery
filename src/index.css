@@ -1,6 +1,6 @@
 #root {
   width: 100%;
-  color: #fff;
+  color: bisque;
   font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
   line-height: 1.5;
@@ -13,8 +13,7 @@
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #0c0c0d;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -48,6 +47,10 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+.navIcon {
+color: bisque
 }
 
 button {
