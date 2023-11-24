@@ -1,12 +1,11 @@
 import Home from "@/components/pages/Home";
-import About from "@/components/pages/About";
+import Upload from "@/components/pages/Upload";
 import Login from "@/components/pages/Login";
 import Profile from "@/components/pages/Profile";
 
 import { ReactElement } from "react";
 
-import { IoHomeOutline } from "react-icons/io5";
-import { IoInformationCircleOutline } from "react-icons/io5";
+import { IoCloudUploadOutline, IoHomeOutline } from "react-icons/io5";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import ImageDetail from "../pages/ImageDetail";
 import MenuIcon from "../MenuIcon/MenuIcon";
@@ -34,14 +33,14 @@ export const nav = [
     ),
   },
   {
-    path: "/about",
-    name: "About",
-    element: <About />,
+    path: "/upload",
+    name: "Upload",
+    element: <Upload />,
     isMenu: true,
-    isPrivate: false,
+    isPrivate: true,
     icon: (
       <MenuIcon>
-        <IoInformationCircleOutline />
+        <IoCloudUploadOutline />
       </MenuIcon>
     ),
   },

@@ -68,12 +68,15 @@ export const AuthWrapper = () => {
     setUser({ ...user, isAuthenticated: false });
   };
 
-  return (
+  return user ? (
     <AuthContext.Provider value={{ user, login, logout }}>
       <>
         <RenderHeader />
         <RenderRoutes />
       </>
     </AuthContext.Provider>
+  ) : (
+    <div>LOADING</div>
+    // TODO LOADER SPINNER COMPONENT
   );
 };

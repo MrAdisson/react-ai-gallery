@@ -33,7 +33,6 @@ const breakpointColumnsObj = {
 };
 
 const MasonryGallery = () => {
-  const { user } = AuthData();
   const navigate = useNavigate();
 
   const [imagesData, setImagesData] = useState<ImageDataType>();
@@ -72,10 +71,8 @@ const MasonryGallery = () => {
   }, [imagesData]);
 
   useEffect(() => {
-    console.log("USER use effect on hom", user);
-    if (!user) return;
     getImages();
-  }, [user]);
+  }, []);
 
   return (
     <div className="image-grid">

@@ -6,7 +6,7 @@ import * as path from "path";
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    exclude: ["react-icons"],
+    exclude: ["react-icons", "react-full-screen"],
   },
   resolve: {
     alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],

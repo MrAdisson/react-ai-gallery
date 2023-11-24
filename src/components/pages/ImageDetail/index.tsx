@@ -9,12 +9,20 @@ import "./ImageDetail.css";
 import { AWS_BUCKET_URL } from "@/utils/statics";
 import { ImageType } from "@/components/MasonryGallery/MasonryGallery";
 import LikeButton from "@/components/LikeButton/LikeButton";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 const ImageDetail = () => {
   const [image, setImage] = useState<ImageType>();
   const { id } = useParams<{ id: string }>();
-  console.log("ID", id);
 
+  const handle = useFullScreenHandle();
+
+  const manageFullScreen = () => {
+    if (handle.active) handle.exit();
+    else {
+      handle.enter();
+    }
+  };
   useEffect(() => {
     (async () => {
       const response = await feathersClient
@@ -30,11 +38,18 @@ const ImageDetail = () => {
       {image && (
         <div className="image-detail-container">
           <div className="imageDetail-image-container">
-            <img
-              src={`${AWS_BUCKET_URL}${image.fileKey}`}
-              alt={image.filename}
-              className="imageDetail-image"
-            />
+            <FullScreen handle={handle}>
+              <img
+                src={`${AWS_BUCKET_URL}${image.fileKey}`}
+                alt={image.filename}
+                className={
+                  handle.active
+                    ? "imageDetail-image-fullscreen"
+                    : "imageDetail-image"
+                }
+                onClick={manageFullScreen}
+              />
+            </FullScreen>
           </div>
           <div className="imageDetail-desc-container">
             <p className="imageDetail-desc-title imageDetail-desc-element">
@@ -56,6 +71,7 @@ const ImageDetail = () => {
           </div>
         </div>
       )}
+      {!image && <div>Loading...</div>}
     </>
   );
 };

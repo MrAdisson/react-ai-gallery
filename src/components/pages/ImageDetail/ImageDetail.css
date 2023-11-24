@@ -36,6 +36,10 @@
     object-fit: contain;
     max-height: 80vh;
 }
+.imageDetail-image-fullscreen {
+  height: 100%;
+  object-fit: contain;
+}
 
 .imageDetail-desc-element{
   margin: 10px 0;

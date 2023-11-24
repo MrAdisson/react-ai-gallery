@@ -26,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: clamp(200px, 40%, 500px);
+  max-width: clamp(300px, 40%, 500px);
   margin: 0 auto ;
   margin-bottom: 20px;
 }
