@@ -3,6 +3,8 @@ import { RenderHeader } from "../components/structure/Header";
 import { RenderRoutes } from "../components/structure/RenderNavigation";
 import { jwtDecode } from "jwt-decode";
 import feathersClient from "@/configs/feathers";
+import Lottie from "lottie-react";
+import loader01 from "@/assets/lotties/loader01.json";
 
 export type User = {
   email: string;
@@ -76,7 +78,9 @@ export const AuthWrapper = () => {
       </>
     </AuthContext.Provider>
   ) : (
-    <div>LOADING</div>
+    <div style={{ height: "80vh", display: "flex", alignItems: "center" }}>
+      <Lottie animationData={loader01} />
+    </div>
     // TODO LOADER SPINNER COMPONENT
   );
 };

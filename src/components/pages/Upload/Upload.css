@@ -11,11 +11,23 @@
 
 .uploadPreview {
     height: 400px;
-    width: clamp(200px, 100%, 400px);
+    width: 100%;
     border: 1px solid black;
     margin-right: 50px;
     object-fit: contain;
 }
+
+.drop-zone {
+    height: 30vh!important;
+    border: 2px dotted bisque ;
+    width: clamp(300px, 50vw, 500px);
+    display: flex;
+    padding: 20px!important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .uploadForm {
   display: flex;
@@ -23,6 +35,11 @@
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+}
+
+.UploadDropLottie {
+
+    animation: fadein 1s;
 }
 
 .uploadForm > div {
@@ -35,3 +52,10 @@
 
 .uploadForm > div > label {
 }
+
+/* FADE IN FOR LOTTIE */
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }

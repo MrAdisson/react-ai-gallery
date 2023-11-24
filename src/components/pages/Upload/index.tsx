@@ -4,6 +4,8 @@ import feathersClient from "@/configs/feathers";
 import "./Upload.css";
 import { FileUploader } from "react-drag-drop-files";
 import { toast } from "react-toastify";
+import Lottie from "lottie-react";
+import fileUploadLottie from "@/assets/lotties/fileToTheCloudLottie.json";
 
 const About = () => {
   const [file, setFile] = useState<File>();
@@ -14,6 +16,7 @@ const About = () => {
   const [negativePrompt, setNegativePrompt] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [preview, setPreview] = useState<string>();
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   const resetForm = () => {
     setFile(undefined);
@@ -87,8 +90,28 @@ const About = () => {
               name="file"
               multiple={false}
               types={["PNG", "JPEG", "GIF"]}
-              label={"Upload or drop a file"}
-            />
+              onDraggingStateChange={(isDragging: any) => {
+                setIsDragging(isDragging);
+              }}
+              hoverTitle={" "}
+              dropMessageStyle={{ display: "none" }}
+            >
+              <div
+                className="drop-area drop-zone"
+                style={isDragging ? { border: "0px" } : {}}
+                onMouseEnter={() => {
+                  console.log("DRAGGING");
+                }}
+              >
+                {isDragging && (
+                  <Lottie
+                    animationData={fileUploadLottie}
+                    className="UploadDropLottie"
+                  />
+                )}
+                {!isDragging && <div>Clic or drop your image here !</div>}
+              </div>
+            </FileUploader>
           </div>
           <div style={file ? {} : { display: "none" }}>
             <label htmlFor="title">Title</label>
