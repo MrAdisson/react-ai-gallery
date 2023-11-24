@@ -5,12 +5,11 @@ import Profile from "@/components/pages/Profile";
 
 import { ReactElement } from "react";
 
-// ICONS
-
 import { IoHomeOutline } from "react-icons/io5";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import ImageDetail from "../pages/ImageDetail";
+import MenuIcon from "../MenuIcon/MenuIcon";
 
 export type RouteType = {
   path: string;
@@ -21,10 +20,6 @@ export type RouteType = {
   icon?: ReactElement;
 };
 
-export const navigationIconStyle = {
-  fontSize: "2rem",
-};
-
 export const nav = [
   {
     path: "/",
@@ -32,7 +27,11 @@ export const nav = [
     element: <Home />,
     isMenu: true,
     isPrivate: false,
-    icon: <IoHomeOutline style={navigationIconStyle} className="navIcon" />,
+    icon: (
+      <MenuIcon>
+        <IoHomeOutline />
+      </MenuIcon>
+    ),
   },
   {
     path: "/about",
@@ -41,10 +40,9 @@ export const nav = [
     isMenu: true,
     isPrivate: false,
     icon: (
-      <IoInformationCircleOutline
-        style={navigationIconStyle}
-        className="navIcon"
-      />
+      <MenuIcon>
+        <IoInformationCircleOutline />
+      </MenuIcon>
     ),
   },
   {
@@ -54,7 +52,9 @@ export const nav = [
     isMenu: true,
     isPrivate: true,
     icon: (
-      <IoPersonCircleOutline style={navigationIconStyle} className="navIcon" />
+      <MenuIcon>
+        <IoPersonCircleOutline />
+      </MenuIcon>
     ),
   },
   {

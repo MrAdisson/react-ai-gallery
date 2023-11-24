@@ -14,6 +14,7 @@
 
   color-scheme: light dark;
   background-color: #0c0c0d;
+  /* overflow: hidden; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,7 +27,8 @@
   justify-content: space-between;
   align-items: center;
   max-width: clamp(200px, 40%, 500px);
-  margin: 0 auto;
+  margin: 0 auto ;
+  margin-bottom: 20px;
 }
 a {
   font-weight: 500;
@@ -42,6 +44,8 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+  max-height: 100%;
+
 }
 
 h1 {

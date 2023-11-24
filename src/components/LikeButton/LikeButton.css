@@ -1,0 +1,33 @@
+.likeButton {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+.likeButton:hover {
+    /* color: thgrough nice rose red */
+    color: #ff0000;
+    transform: scale(1.2);
+    transition: all 0.2s ease-in-out;
+}
+
+.likeButton > .liked {
+    color: #ff0000;
+}
+
+.LikeButtonAnimationEffect {
+    animation: like-button-to-the-sky-animation 0.5s ease-in-out;
+}
+
+@keyframes like-button-to-the-sky-animation {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}

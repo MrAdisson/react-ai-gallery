@@ -10,7 +10,7 @@ export type User = {
 };
 
 export type ContextType = {
-  user: User;
+  user: User | undefined;
   login: (email: string, password: string) => void;
   logout: () => void;
 };
@@ -26,7 +26,7 @@ export const AuthData = () => useContext(AuthContext);
 
 export const AuthWrapper = () => {
   // USER STATE PASSED TO APP CONTEXT
-  const [user, setUser] = useState<User>({ email: "", isAuthenticated: false });
+  const [user, setUser] = useState<User>();
 
   //RECONNECTER L'UTILISATEUR SI IL A UN TOKEN VALIDE
   useEffect(() => {
@@ -48,6 +48,8 @@ export const AuthWrapper = () => {
           console.log(error);
         }
       })();
+    } else {
+      setUser({ email: "", isAuthenticated: false });
     }
   }, []);
 
@@ -58,7 +60,7 @@ export const AuthWrapper = () => {
       email,
       password,
     });
-    setUser({ ...data.user.email, isAuthenticated: true });
+    setUser({ email: data.user.email, isAuthenticated: true });
   };
   const logout = () => {
     if (!user) return;

@@ -1,0 +1,17 @@
+.menuIcon {
+    transition: all 0.3s ease-in-out;
+    color: bisque;
+    font-size: 2rem;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: transparent;
+}
+
+.menuIcon:hover {
+    
+    background: radial-gradient(#FFFFFF30, transparent);
+    box-shadow: 0 0 90px bisque;
+}

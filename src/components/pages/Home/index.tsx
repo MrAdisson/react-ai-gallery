@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="Home">
       <header className="App-header">
-        <h1>AI Gallery</h1>
+        <h2>Explore the world's best AI generated images...</h2>
       </header>
       <MasonryGallery />
     </div>

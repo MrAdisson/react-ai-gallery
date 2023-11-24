@@ -6,18 +6,9 @@ import { useParams } from "react-router-dom";
 import feathersClient from "@/configs/feathers";
 
 import "./ImageDetail.css";
-import { Id } from "@feathersjs/feathers";
 import { AWS_BUCKET_URL } from "@/utils/statics";
-
-type ImageType = {
-  _id: Id;
-  title?: string;
-  description?: string;
-  positivePromt?: string;
-  negativePromt?: string;
-  fileKey: string;
-  filename: string;
-};
+import { ImageType } from "@/components/MasonryGallery/MasonryGallery";
+import LikeButton from "@/components/LikeButton/LikeButton";
 
 const ImageDetail = () => {
   const [image, setImage] = useState<ImageType>();
@@ -35,26 +26,37 @@ const ImageDetail = () => {
   }, [id]);
 
   return (
-    <div className="image-detail">
+    <>
       {image && (
-        <div className="image-and-desc-container">
+        <div className="image-detail-container">
           <div className="imageDetail-image-container">
             <img
-              className="imageDetail-image"
               src={`${AWS_BUCKET_URL}${image.fileKey}`}
               alt={image.filename}
-              //   style={{ height: "50vh" }}
+              className="imageDetail-image"
             />
           </div>
           <div className="imageDetail-desc-container">
-            <h1>{image.title}</h1>
-            <p>{image.description}</p>
-            <p>{image.positivePromt}</p>
-            <p>{image.negativePromt}</p>
+            <p className="imageDetail-desc-title imageDetail-desc-element">
+              {image.title || "Untitled"}
+            </p>
+            <p className="imageDetail-desc-description imageDetail-desc-element">
+              "{image.description || "..."}"
+            </p>
+            <div>Prompts : </div>
+            <p className="imageDetail-desc-pprompt imageDetail-desc-prompt imageDetail-desc-element">
+              {image.positivePrompt}
+            </p>
+            <p className="imageDetail-desc-nprompt imageDetail-desc-prompt imageDetail-desc-element">
+              {image.negativePrompt}
+            </p>
+            <div className="imageDetail-likes">
+              <LikeButton image={image} />
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -1,16 +1,20 @@
 import { AWS_BUCKET_URL } from "@/utils/statics";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./AIImage.css";
 import AIImageMenu from "./AIImageMenu/AIImageMenu";
+import "./AIImage.css";
+import { ImageType } from "../MasonryGallery/MasonryGallery";
 
-const AIImage = ({ fileKey, alt, title, id }: any) => {
+const AIImage = ({
+  image,
+  onClick,
+  className,
+}: {
+  image: ImageType;
+  onClick: () => void;
+  className?: string;
+}) => {
+  const { fileKey } = image;
   const [hover, setHover] = useState(false);
-  const navigate = useNavigate();
-
-  const onClick = () => {
-    navigate(`/image/${id}`);
-  };
 
   return (
     <div
@@ -22,13 +26,13 @@ const AIImage = ({ fileKey, alt, title, id }: any) => {
       onMouseLeave={() => {
         setHover(false);
       }}
+      className={className}
     >
       <div style={{ ...styles.base, ...(hover && styles.hover) }}>
-        <AIImageMenu hover={hover} title={title} />
-
+        <AIImageMenu hover={hover} image={image} />
         <img
           src={`${AWS_BUCKET_URL}${fileKey}`}
-          alt={alt}
+          alt={image.title || "NO ALT DESCRIPTION"}
           width="100%"
           loading="lazy"
         />

@@ -5,6 +5,8 @@ import feathersClient from "@/configs/feathers";
 import Masonry from "react-masonry-css";
 import { GALLERY_IMAGE_WIDTH } from "@/utils/statics";
 import AIImage from "../AIImage/AIImage";
+import { AuthData } from "@/auth/AuthWrapper";
+import { useNavigate } from "react-router-dom";
 
 export type ImageDataType = {
   total: number;
@@ -16,8 +18,10 @@ export type ImageType = {
   _id: string;
   title?: string;
   description?: string;
-  positivePromt?: string;
-  negativePromt?: string;
+  likes: number;
+  isLiked?: boolean;
+  positivePrompt?: string;
+  negativePrompt?: string;
   fileKey: string;
   filename: string;
 };
@@ -29,6 +33,9 @@ const breakpointColumnsObj = {
 };
 
 const MasonryGallery = () => {
+  const { user } = AuthData();
+  const navigate = useNavigate();
+
   const [imagesData, setImagesData] = useState<ImageDataType>();
 
   const getImages = useCallback(async () => {
@@ -42,6 +49,7 @@ const MasonryGallery = () => {
           },
         },
       });
+    console.log("RESPONSE", response);
     setImagesData(response);
   }, []);
 
@@ -64,8 +72,10 @@ const MasonryGallery = () => {
   }, [imagesData]);
 
   useEffect(() => {
+    console.log("USER use effect on hom", user);
+    if (!user) return;
     getImages();
-  }, []);
+  }, [user]);
 
   return (
     <div className="image-grid">
@@ -96,10 +106,8 @@ const MasonryGallery = () => {
             {imagesData?.data &&
               imagesData.data.map((image: ImageType) => (
                 <AIImage
-                  fileKey={image.fileKey}
-                  title={image.title}
-                  alt={image.filename}
-                  id={image._id}
+                  image={image}
+                  onClick={() => navigate(`/image/${image._id}`)}
                   key={image._id}
                 />
               ))}
