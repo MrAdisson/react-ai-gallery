@@ -6,6 +6,8 @@ import { FileUploader } from "react-drag-drop-files";
 import { toast } from "react-toastify";
 import Lottie from "lottie-react";
 import fileUploadLottie from "@/assets/lotties/fileToTheCloudLottie.json";
+import loader01 from "@/assets/lotties/loader01.json";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
   const [file, setFile] = useState<File>();
@@ -17,6 +19,8 @@ const About = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [preview, setPreview] = useState<string>();
   const [isDragging, setIsDragging] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const resetForm = () => {
     setFile(undefined);
@@ -68,6 +72,7 @@ const About = () => {
         // RESET FORM
         resetForm();
         toast.success("Image uploaded successfully !");
+        navigate("/");
       } catch (error) {
         console.log(error);
         setLoading(false);
@@ -89,7 +94,7 @@ const About = () => {
               handleChange={handleFileChange}
               name="file"
               multiple={false}
-              types={["PNG", "JPEG", "GIF"]}
+              types={["PNG", "JPEG", "JPG", "GIF"]}
               onDraggingStateChange={(isDragging: any) => {
                 setIsDragging(isDragging);
               }}
@@ -114,41 +119,53 @@ const About = () => {
             </FileUploader>
           </div>
           <div style={file ? {} : { display: "none" }}>
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title"># Title</label>
             <input
               type="text"
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter image title here"
             />
           </div>
           <div style={file ? {} : { display: "none" }}>
-            <label htmlFor="description">Description</label>
+            <label htmlFor="description"># Description</label>
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              placeholder="Enter image description here"
             />
           </div>
           <div style={file ? {} : { display: "none" }}>
-            <label htmlFor="positivePromt">Positive Promt</label>
+            <label htmlFor="positivePromt"># Positive Promt</label>
             <textarea
               id="positivePromt"
               value={positivePrompt}
               onChange={(e) => setPositivePrompt(e.target.value)}
+              placeholder="Enter your positive prompt here"
             />
           </div>
           <div style={file ? {} : { display: "none" }}>
-            <label htmlFor="negativePromt">Negative Promt</label>
+            <label htmlFor="negativePromt"># Negative Promt</label>
             <textarea
               id="negativePromt"
               value={negativePrompt}
               onChange={(e) => setNegativePrompt(e.target.value)}
+              placeholder="Enter your negative prompt here"
             />
           </div>
           {file && (
-            <button type="submit" disabled={loading}>
-              {loading ? "LOADING" : "Submit"}
+            <button
+              type="submit"
+              disabled={loading}
+              className="UploadSubmitBtn"
+            >
+              {loading ? (
+                <Lottie animationData={loader01} style={{ height: "50px" }} />
+              ) : (
+                "Submit"
+              )}
             </button>
           )}
         </form>

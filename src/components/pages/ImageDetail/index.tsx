@@ -10,6 +10,7 @@ import { AWS_BUCKET_URL } from "@/utils/statics";
 import { ImageType } from "@/components/MasonryGallery/MasonryGallery";
 import LikeButton from "@/components/LikeButton/LikeButton";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import { toast } from "react-toastify";
 
 const ImageDetail = () => {
   const [image, setImage] = useState<ImageType>();
@@ -59,10 +60,28 @@ const ImageDetail = () => {
               "{image.description || "..."}"
             </p>
             <div>Prompts : </div>
-            <p className="imageDetail-desc-pprompt imageDetail-desc-prompt imageDetail-desc-element">
+            <p
+              className="imageDetail-desc-pprompt imageDetail-desc-prompt imageDetail-desc-element"
+              onClick={() => {
+                if (!image.positivePrompt) return;
+                navigator.clipboard.writeText(image.positivePrompt);
+                toast.success("Positive prompt copied to clipboard !", {
+                  icon: "👏",
+                });
+              }}
+            >
               {image.positivePrompt}
             </p>
-            <p className="imageDetail-desc-nprompt imageDetail-desc-prompt imageDetail-desc-element">
+            <p
+              className="imageDetail-desc-nprompt imageDetail-desc-prompt imageDetail-desc-element"
+              onClick={() => {
+                if (!image.negativePrompt) return;
+                navigator.clipboard.writeText(image.negativePrompt);
+                toast.success("Negative prompt copied to clipboard !", {
+                  icon: "👏",
+                });
+              }}
+            >
               {image.negativePrompt}
             </p>
             <div className="imageDetail-likes">

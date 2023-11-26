@@ -2,19 +2,41 @@
 
 import React, { useState } from "react";
 import { AuthData } from "@/auth/AuthWrapper";
+// import { useHistory } from 'react-router-dom';
 
 import "../commonCss/LoginRegister.css";
+import feathersClient from "@/configs/feathers";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [checkPassword, setCheckPassword] = useState<string>("");
 
-  const { login, user } = AuthData();
+  const { user } = AuthData();
+
+  const register = async (
+    email: string,
+    password: string,
+    checkPassword: string
+  ) => {
+    if (password !== checkPassword) {
+      toast.error("Passwords don't match", {
+        icon: "🔑",
+      });
+      return;
+    }
+    const registerData = await feathersClient.service("users").create({
+      email,
+      password,
+    });
+    console.log(registerData);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login(email, password);
+    register(email, password, checkPassword);
   };
 
   return !user?.isAuthenticated ? (
@@ -42,19 +64,29 @@ const Login = () => {
             name="password"
             placeholder="Password"
             required
-            autoComplete="on"
+          />
+        </div>
+        <div className="login-form-group">
+          <label htmlFor="password">Confirm Password</label>
+          <input
+            value={checkPassword}
+            onChange={(e) => setCheckPassword(e.target.value)}
+            type="password"
+            id="checkPassword"
+            name="checkPassword"
+            placeholder="Confirm Password"
+            required
           />
         </div>
         <div className="form-group">
           <button type="submit" className="login-btn">
-            Log in
+            Register
           </button>
         </div>
       </form>
-
       <div className="login-register">
         <p>
-          Don't have an account ? <Link to="/register">Register</Link>
+          Already have an account ? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
@@ -65,4 +97,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

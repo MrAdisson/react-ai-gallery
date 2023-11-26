@@ -2,12 +2,10 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  /* justify-content: center; */
+  align-items: flex-start;
   margin: 20px auto;
   width: clamp(500px, 100%, 1100px);
   padding: 20px;
-  /* take whole available height: */
   height: clamp(400px, 90%, 100vh);
 }
 
@@ -17,7 +15,7 @@
   width: 65%;
 }
 .imageDetail-desc-container {
-  margin: 10px 0px 10px 30px;
+  margin: 0px 0px 10px 30px;
   padding: 20px;
   width: 35%;
   height: 100%;
@@ -37,7 +35,12 @@
     max-height: 80vh;
 }
 .imageDetail-image-fullscreen {
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100%;
+  max-width: 100%;
   object-fit: contain;
 }
 
@@ -103,8 +106,7 @@
   }
   .imageDetail-desc-container {
     width: 100%;
-  }
-  .imageDetail-desc-container {
+    box-sizing: border-box;
     margin: 30px 0px 0px 0px;
   }
 }

@@ -37,6 +37,9 @@ const MasonryGallery = () => {
 
   const [imagesData, setImagesData] = useState<ImageDataType>();
 
+  const [sortFilter, setSortFilter] = useState<any>({ _id: -1 });
+  const [queryFilter, setQueryFilter] = useState<any>({});
+
   const getImages = useCallback(async () => {
     const response: ImageDataType = await feathersClient
       .service("images")
@@ -44,13 +47,14 @@ const MasonryGallery = () => {
         query: {
           $limit: 10,
           $sort: {
-            _id: -1,
+            ...sortFilter,
           },
+          ...queryFilter,
         },
       });
     console.log("RESPONSE", response);
     setImagesData(response);
-  }, []);
+  }, [sortFilter, queryFilter]);
 
   const next = useCallback(async () => {
     console.log("LOADING MORE IMAGES...");
@@ -59,8 +63,9 @@ const MasonryGallery = () => {
         $limit: 10,
         $skip: imagesData?.data.length,
         $sort: {
-          _id: -1,
+          ...sortFilter,
         },
+        ...queryFilter,
       },
     });
     imagesData &&
@@ -68,14 +73,46 @@ const MasonryGallery = () => {
         ...response,
         data: [...imagesData.data, ...response.data],
       });
-  }, [imagesData]);
+  }, [imagesData, queryFilter, sortFilter]);
 
   useEffect(() => {
+    console.log(sortFilter, queryFilter);
     getImages();
-  }, []);
+  }, [sortFilter, queryFilter]);
 
   return (
     <div className="image-grid">
+      {/* FILTER SELECTOR */}
+      <div className="image-grid-filter fixedElement">
+        {/* CHECKBOXK "Has Prompts" */}
+        <div className="image-grid-filter-hasPrompts">
+          <label htmlFor="hasPrompts">Has Prompts</label>
+          <input
+            onChange={(e) => {
+              if (!e.target.checked) return setQueryFilter({});
+              setQueryFilter({
+                ...queryFilter,
+                positivePrompt: { $gt: 0 },
+              });
+            }}
+            type="checkbox"
+            id="hasPrompts"
+            name="hasPrompts"
+          />
+        </div>
+        <select
+          onChange={(e) => {
+            setSortFilter({
+              ...sortFilter,
+              ["_id"]: e.target.value === "desc" ? -1 : 1,
+            });
+          }}
+          name="timeSort"
+        >
+          <option value={"desc"}>Newest</option>
+          <option value={"asc"}>Oldest</option>
+        </select>
+      </div>
       <InfiniteScroll
         dataLength={imagesData?.data.length || 0}
         next={next}

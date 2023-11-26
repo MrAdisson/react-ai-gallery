@@ -5,6 +5,8 @@ import { jwtDecode } from "jwt-decode";
 import feathersClient from "@/configs/feathers";
 import Lottie from "lottie-react";
 import loader01 from "@/assets/lotties/loader01.json";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export type User = {
   email: string;
@@ -44,6 +46,9 @@ export const AuthWrapper = () => {
               strategy: "jwt",
               accessToken,
             });
+            toast.success("Welcome back " + data.user.email, {
+              icon: "👋",
+            });
             setUser({ email: data.user.email, isAuthenticated: true });
           }
         } catch (error) {
@@ -57,12 +62,17 @@ export const AuthWrapper = () => {
 
   // LOGIN & LOGOUT FUNCTIONS
   const login = async (email: string, password: string) => {
-    const data = await feathersClient.authenticate({
-      strategy: "local",
-      email,
-      password,
-    });
-    setUser({ email: data.user.email, isAuthenticated: true });
+    try {
+      const data = await feathersClient.authenticate({
+        strategy: "local",
+        email,
+        password,
+      });
+
+      setUser({ email: data.user.email, isAuthenticated: true });
+    } catch (error) {
+      toast.error("Invalid credentials", { icon: "🔑" });
+    }
   };
   const logout = () => {
     if (!user) return;

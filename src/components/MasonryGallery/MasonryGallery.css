@@ -15,6 +15,81 @@
   .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
     margin-bottom: 30px;
   }
+
+  .fixedElement {
+    position: sticky;
+    top: 0;
+    position: -webkit-sticky;
+    padding: 10px;
+}
+
+  .image-grid-filter {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 2;
+    margin-right: 20px;
+    margin-top: 20px;
+    /* GLASSMORPHISM EFFECT : */
+    background: #0c0c0d25;
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    margin-bottom: 10px;
+  }
+  .image-grid-filter > select {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: bisque;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: transparent;
+    /* none selectable */
+    user-select: none;
+    outline: none;
+    margin-left: 20px;
+    /* float: right; */
+  }
+  
+  .image-grid-filter > select:hover {
+    box-shadow: 0 0 10px #ccc;
+  }
+
+  .image-grid-filter-hasPrompts {
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    color: bisque;
+    padding: 10px;
+    transition: 0.3s;
+    font-size: .8rem;
+  }
+  .image-grid-filter-hasPrompts > input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: rgba(255, 228, 196, 0.3);
+    cursor: pointer;
+  }
+  .image-grid-filter-hasPrompts > input:checked {
+    background-color: bisque;
+    /* MODERN CHECKBOX */
+    accent-color: #ccc
+  }
+
+
+  .image-grid-filter-hasPrompts:hover {
+    box-shadow: 0 0 10px #ccc;
+  }
+
   
   @media (max-width: 730px) {
     .my-masonry-grid {
@@ -27,3 +102,8 @@
       margin-bottom: 15px; /* space between items */
     }
   }
+
+
+
+
+  

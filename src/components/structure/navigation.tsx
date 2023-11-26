@@ -9,6 +9,7 @@ import { IoCloudUploadOutline, IoHomeOutline } from "react-icons/io5";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import ImageDetail from "../pages/ImageDetail";
 import MenuIcon from "../MenuIcon/MenuIcon";
+import Register from "../pages/Register";
 
 export type RouteType = {
   path: string;
@@ -60,6 +61,13 @@ export const nav = [
     path: "/login",
     name: "Login",
     element: <Login />,
+    isMenu: false,
+    isPrivate: false,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    element: <Register />,
     isMenu: false,
     isPrivate: false,
   },

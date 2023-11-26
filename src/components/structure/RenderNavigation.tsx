@@ -44,7 +44,7 @@ export const RenderMenu = () => {
 
       {user?.isAuthenticated ? (
         <div className="menuItem">
-          <Link to={"#"} onClick={logout}>
+          <Link to={"/"} onClick={logout}>
             <MenuIcon>
               <IoLogOutOutline />
             </MenuIcon>
