@@ -5,7 +5,6 @@ import feathersClient from "@/configs/feathers";
 import Masonry from "react-masonry-css";
 import { GALLERY_IMAGE_WIDTH } from "@/utils/statics";
 import AIImage from "../AIImage/AIImage";
-import { AuthData } from "@/auth/AuthWrapper";
 import { useNavigate } from "react-router-dom";
 
 export type ImageDataType = {

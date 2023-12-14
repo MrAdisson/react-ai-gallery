@@ -5,7 +5,7 @@ const Profile = () => {
   return (
     <div className="profile">
       <h1>Profile</h1>
-      <p>Here is your email: {user.email}</p>
+      <p>Here is your email: {user?.email}</p>
     </div>
   );
 };

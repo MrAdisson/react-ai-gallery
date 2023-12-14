@@ -7,10 +7,8 @@ import axios from "axios";
 // CONFIGURE FEATHERS
 const feathersClient = feathers();
 
-// CHECK IF VITE is --host mode
-
 // CONFIGURE REST CLIENT
-const restClient = rest("http://192.168.1.32:3030");
+const restClient = rest("http://localhost:3030");
 
 // CONFIGURE AUTHENTICATION
 feathersClient.configure(restClient.axios(axios));

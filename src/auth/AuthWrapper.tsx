@@ -5,7 +5,6 @@ import { jwtDecode } from "jwt-decode";
 import feathersClient from "@/configs/feathers";
 import Lottie from "lottie-react";
 import loader01 from "@/assets/lotties/loader01.json";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export type User = {
@@ -53,6 +52,7 @@ export const AuthWrapper = () => {
           }
         } catch (error) {
           console.log(error);
+          setUser({ email: "", isAuthenticated: false });
         }
       })();
     } else {
